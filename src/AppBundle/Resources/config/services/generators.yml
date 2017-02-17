@@ -1,0 +1,4 @@
+services:
+    app.generator.time_range_parameter:
+        public: false
+        class: AppBundle\Generator\LastTenYearsTimeRangeParameterGenerator

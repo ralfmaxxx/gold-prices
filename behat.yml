@@ -1,0 +1,16 @@
+default:
+    autoload:
+        - '%paths.base%/features/bootstrap/'
+    extensions:
+        Behat\Symfony2Extension: ~
+    suites:
+        default:
+            filters:
+                tags: '~@wip&&~@willberemoved'
+            type: 'symfony_bundle'
+            bundle: 'AppBundle'
+            contexts:
+                - 'Tests\AppBundle\AppContext'
+                - 'Tests\AppBundle\ApiContext'
+                - 'Tests\AppBundle\ConsoleContext'
+                - 'Tests\AppBundle\DataContext'

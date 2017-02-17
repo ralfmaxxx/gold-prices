@@ -1,0 +1,18 @@
+services:
+    app.command.gold_prices.importer:
+        public: true
+        class: AppBundle\Command\GoldPricesImporterCommand
+        arguments:
+            - '@app.generator.time_range_parameter'
+            - '@app.repository.api.gold_price'
+            - '@app.repository.orm.gold_price'
+        tags:
+            - { name: 'console.command' }
+
+    app.command.gold_prices.biggest_gain:
+        public: true
+        class: AppBundle\Command\BiggestGainCommand
+        arguments:
+            - '@app.query.biggest_gain'
+        tags:
+            - { name: 'console.command' }

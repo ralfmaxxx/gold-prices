@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="GoldPrices">
+    <description>GoldPrices coding standard</description>
+    <file>features</file>
+    <file>src</file>
+    <rule ref="PSR1"/>
+    <rule ref="PSR2"/>
+</ruleset>

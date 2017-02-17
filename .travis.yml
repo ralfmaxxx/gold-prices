@@ -1,0 +1,29 @@
+sudo: false
+
+language: php
+
+env:
+    global:
+        - secure: 'BuCGKlVIOcdaPHkv14u/6/RvTZ09LaPMb6nBp9YtT3/aGphOLvpyGbnF70EXQwscBchE2rDlNnibI+qiWdSsYaGvuODBHZiexy5aoC4/8rLCh1KRfxKXsTvgNYE9IdnD8iu1BcijHR1eczIsUKHDETu37E6dQq7Su6pQHxTIGQijP8DGib+idME2+S0k41JWKuAm2AHXJEbG1AQd9xGxgpDqTRLXjrP15Rj81H6dVMJwKM4poNewPyqeBghA7qeKehEaLyrSRe0o5uenQ2jOATT/gQRJWuAfW1aUayEAQoi+deaNlhW/L0kqYKkf2c/R8WPu/1W8tQiuJL2296IISojrYFlwP7fBfP0BVZ1vttr7XAnGC95IRtTXojxsFnY6AeL5FRiC9JppOc8OGbuwLB9GqI4leD+Trr0RBHuCq1mT+ZRM5PWSeZOW/vHPe1VA+gQGgOOyLzPpQcBNYpVMzpssTOmZTynJPPkntfO4qb8SMbxC4q9pPkN2CHd2UFu5F/XHjRNSaZ/wAMbXTjt7MwGu+3SXce6io505Cbj+Gcg8SiorUosUBvkmbWcKx0F0rTB50OydrPW9y/xvt/0uo9v8Q0cahrR8TNm7Qim9WMdjXBRaEaxvsT0Xn4NzsylQRQ6Dz2ONbt23q41DUbu5yKXSMTaCB9BWWsH52Xrxt/8=' # GITHUB_OAUTH_TOKEN
+        - SYMFONY__ENV='test'
+        - SYMFONY__NBP__API__ENDPOINT=''
+        - SYMFONY__DATABASE__URL='mysql://travis:@localhost/sa-content-packages?charset=UTF8'
+        - SYMFONY__DATABASE__URL__TEST='mysql://travis:@localhost/sa-content-packages-test?charset=UTF8'
+
+cache:
+    directories:
+        - bin # composer
+        - vendor # composer
+
+php:
+    - '7.1'
+
+before_install:
+    - composer self-update
+    - composer config github-oauth.github.com $GITHUB_OAUTH_TOKEN
+
+install:
+    - composer install --no-interaction
+
+script:
+    - bin/phing

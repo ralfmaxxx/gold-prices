@@ -1,0 +1,18 @@
+services:
+    app.repository.api.factory.path_and_query:
+        public: false
+        class: AppBundle\Repository\Api\Configuration\PathAndQueryFactory
+
+    app.repository.api.gold_price:
+        public: true
+        class: AppBundle\Repository\Api\GoldPriceRepository
+        arguments:
+            - '@app.client.http'
+            - '@app.repository.api.factory.path_and_query'
+
+    app.repository.orm.gold_price:
+        public: true
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - AppBundle\Entity\GoldPrice

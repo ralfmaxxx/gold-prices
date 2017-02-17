@@ -1,0 +1,17 @@
+services:
+    app.client.http.configuration:
+        public: false
+        class: AppBundle\Http\Configuration\Endpoint
+        arguments:
+            - '%nbp_api_endpoint%'
+
+    app.client.http.guzzle_client:
+        public: false
+        class: GuzzleHttp\Client
+
+    app.client.http:
+        public: true
+        class: AppBundle\Http\Client
+        arguments:
+            - '@app.client.http.guzzle_client'
+            - '@app.client.http.configuration'

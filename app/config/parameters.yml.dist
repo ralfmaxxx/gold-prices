@@ -1,0 +1,4 @@
+parameters:
+    database_url: '%database.url%'
+    nbp_api_endpoint: '%nbp.api.endpoint%'
+    secret: 'hkjFUYgsdasuiHIHUIhi'

@@ -1,0 +1,5 @@
+SYMFONY_ENV='dev'
+
+SYMFONY__DATABASE__URL='mysql://root:passwd@localhost:3306/gold-prices?charset=UTF8'
+SYMFONY__DATABASE__URL__TEST='mysql://root:passwd@localhost:3306/gold-prices-test?charset=UTF8'
+SYMFONY__NBP__API__ENDPOINT='http://api.nbp.pl/api'

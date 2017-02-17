@@ -1,0 +1,6 @@
+services:
+    app.query.biggest_gain:
+        public: false
+        class: AppBundle\Query\FindBiggestGainQueryFunction
+        arguments:
+            - '@doctrine.orm.entity_manager'

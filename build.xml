@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Gold Prices" default="all">
+    <property name="package_src_directory" value="src" />
+    <property name="package_features_directory" value="features" />
+
+    <import file="phing/project.xml" />
+    <import file="phing/quality.xml" />
+    <import file="phing/tests.xml" />
+
+    <target name="all" depends="quality,tests" description="runs quality tools and tests"/>
+
+</project>
