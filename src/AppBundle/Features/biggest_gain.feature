@@ -1,6 +1,6 @@
 Feature: Biggest gain
     In order to get information about best days for investment
-    As a System
+    As an Investor
     I want to get biggest gain details
 
     Scenario: Biggest gain for money investment

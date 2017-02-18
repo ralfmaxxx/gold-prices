@@ -14,6 +14,20 @@ class ApiContext implements KernelAwareContext
 {
     use KernelAwareDictionaryTrait;
 
+    private const RELATIVE_DATE_MAPPER = [
+        'this year' => 'now',
+        'last year' => '-1 year',
+        'two years ago' => '-2 years',
+        'three years ago' => '-3 years',
+        'four years ago' => '-4 years',
+        'five years ago' => '-5 years',
+        'six years ago' => '-6 years',
+        'seven years ago' => '-7 years',
+        'eight years ago' => '-8 years',
+        'nine years ago' => '-9 years',
+        'ten years ago' => '-10 years',
+    ];
+
     private const APP_CLIENT_HTTP_SERVICE_NAME = 'app.client.http';
 
     private const GOLD_PRICE_PATTERN = '{"data": "%s", "cena": %s}';
@@ -21,6 +35,14 @@ class ApiContext implements KernelAwareContext
     private const API_RESPONSE_PATTERN = '[%s]';
 
     private const API_EMPTY_COLLECTION = '[]';
+
+    /**
+     * @Transform :relativeDate
+     */
+    public function castRelativeDateToYear(string $relativeDate): string
+    {
+        return date('Y', strtotime(self::RELATIVE_DATE_MAPPER[$relativeDate]));
+    }
 
     /**
      * @Transform table:api_price,api_date
@@ -40,31 +62,31 @@ class ApiContext implements KernelAwareContext
     }
 
     /**
-     * @Given There are gold prices in API for year :year:
+     * @Given There are gold prices in API from :relativeDate:
      */
-    public function thereAreGoldPricesInApiForYear(int $year, Response $apiResponse)
+    public function thereAreGoldPricesInApiFrom(string $relativeDate, Response $apiResponse)
     {
         $this
             ->getContainer()
             ->mock(self::APP_CLIENT_HTTP_SERVICE_NAME, ClientInterface::class)
             ->shouldReceive('get')
-            ->with(Mockery::on(function (PathAndQuery $pathAndQuery) use ($year) {
-                return $pathAndQuery->get() !== str_replace($year, '', $pathAndQuery->get());
+            ->with(Mockery::on(function (PathAndQuery $pathAndQuery) use ($relativeDate) {
+                return $pathAndQuery->get() !== str_replace($relativeDate, '', $pathAndQuery->get());
             }))
             ->andReturn($apiResponse);
     }
 
     /**
-     * @Given There is no data available for year :year
+     * @Given There is no data available from :relativeDate
      */
-    public function thereIsNoDataAvailableForYear(int $year)
+    public function thereIsNoDataAvailableFrom(string $relativeDate)
     {
         $this
             ->getContainer()
             ->mock(self::APP_CLIENT_HTTP_SERVICE_NAME, ClientInterface::class)
             ->shouldReceive('get')
-            ->with(Mockery::on(function (PathAndQuery $pathAndQuery) use ($year) {
-                return $pathAndQuery->get() !== str_replace($year, '', $pathAndQuery->get());
+            ->with(Mockery::on(function (PathAndQuery $pathAndQuery) use ($relativeDate) {
+                return $pathAndQuery->get() !== str_replace($relativeDate, '', $pathAndQuery->get());
             }))
             ->andReturn(new Response(self::API_EMPTY_COLLECTION));
     }

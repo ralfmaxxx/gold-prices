@@ -1,10 +1,16 @@
 # GOLD PRICES
 
+[![Build Status](https://travis-ci.org/ralfmaxxx/gold-prices.svg?branch=master)](https://travis-ci.org/ralfmaxxx/gold-prices)
+
 ## Requirements
 
 You have to install vagrant [vagrant project](https://www.vagrantup.com/) and vagrant plugin:
 
 ```vagrant plugin install vagrant-hostmanager```
+
+## Travis
+
+Check it out [here](https://travis-ci.org/ralfmaxxx/gold-prices)
 
 ## How to install?
 

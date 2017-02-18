@@ -49,7 +49,7 @@ class BiggestGainCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $money = $input->getArgument(self::ARGUMENT_MONEY_NAME) * 100;
+        $money = intval($input->getArgument(self::ARGUMENT_MONEY_NAME)) * 100;
 
         $gainFunction = $this->biggestGainQueryFunction;
 
